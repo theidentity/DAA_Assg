@@ -6,8 +6,12 @@ import matplotlib.pyplot as plt
 import numpy
 import collections
 
-timeArray = {}
+xaxis=[]
+yaxis=[]
+
+f=open('timeFile','w')
 k=0;
+
 for i in range (500,10000,1000):
 	k=k+1
 	if k==5:
@@ -20,16 +24,16 @@ for i in range (500,10000,1000):
 	endTime = time.time()
 	diff = endTime-startTime
 
-	print (i,diff)
+	xaxis.append(i)
+	yaxis.append(diff)
 	timeArray[i]=diff
 		
 
 timeArray = collections.OrderedDict(sorted(timeArray.items()))
-print (timeArray)
-plt.bar(range(len(timeArray)), timeArray.values(), align='center')
-plt.xticks(range(len(timeArray)), timeArray.keys())
+plt.plot(xaxis,yaxis)
 
 plt.show()
+exit(0)
 
 # json_encode = json.dumps(timeArray,indent = 4)
 # print(json_encode)
