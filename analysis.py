@@ -1,6 +1,6 @@
 import random
 import time
-from bubbleSort import bubbleSort 
+import sort
 import json
 import matplotlib.pyplot as plt
 import numpy
@@ -9,9 +9,7 @@ import collections
 xaxis=[]
 yaxis=[]
 
-f=open('timeFile','w')
-k=0;
-
+k=0
 for i in range (500,10000,1000):
 	k=k+1
 	if k==5:
@@ -19,18 +17,40 @@ for i in range (500,10000,1000):
 	array = random.sample(range(0,10000),i)
 	startTime = time.time()
 	
-	sortedArray = bubbleSort(array)
+	sortedArray = sort.selectionSort(array)
 	
 	endTime = time.time()
 	diff = endTime-startTime
 
 	xaxis.append(i)
 	yaxis.append(diff)
-	timeArray[i]=diff
+
+plt.plot(xaxis,yaxis,'r')
 		
 
-timeArray = collections.OrderedDict(sorted(timeArray.items()))
-plt.plot(xaxis,yaxis)
+xaxis=[]
+yaxis=[]
+
+k=0
+for i in range (500,10000,1000):
+	k=k+1
+	if k==5:
+		break
+	array = random.sample(range(0,10000),i)
+	startTime = time.time()
+	
+	sortedArray = sort.shellSort(array)
+	
+	endTime = time.time()
+	diff = endTime-startTime
+
+	xaxis.append(i)
+	yaxis.append(diff)
+
+
+
+plt.plot(xaxis,yaxis,'b')
+
 
 plt.show()
 exit(0)
